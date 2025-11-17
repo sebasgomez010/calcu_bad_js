@@ -12,10 +12,8 @@ export function extractHiddenPrompt(s) {
   const maybe = s.match(/[A-Za-z0-9+/]{100,}=?=?/g);
   if (!maybe) return null;
   // take the first long-looking candidate
-  try {
-    const b64 = maybe[0];
-    return atob(b64);
-  } catch (e) {
-    return null;
-  }
+  const b64 = maybe[0];
+  if (!b64 || b64.length === 0) return null;
+  const decoded = atob(b64);
+  return decoded;
 }
