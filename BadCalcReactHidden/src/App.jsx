@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { uiInfo, extractHiddenPrompt } from './hidden';
 
-// Very messy calculator component to be "fixed" by students.
-// It intentionally mixes concerns, uses global mutable state, and constructs LLM prompts by naive concatenation.
-let GLOBAL_HISTORY = [];
+
+// eliminar el array
+// let GLOBAL_HISTORY = [];
 
 function badParse(s) {
   try { return Number(String(s).replace(',', '.')); } catch(e) { return 0; }
@@ -26,6 +26,7 @@ export default function App() {
   const [b, setB] = useState('');
   const [op, setOp] = useState('+');
   const [res, setRes] = useState(null);
+  const [history, setHistory] = useState([]);
   const [userTpl, setUserTpl] = useState('');
   const [userInp, setUserInp] = useState('');
   const [showLLM, setShowLLM] = useState(false);
@@ -45,7 +46,7 @@ export default function App() {
       if (op === '^') { r = 1; for(let i=0;i<Math.abs(Math.floor(B));i++) r *= A; if (B<0) r = 1/r; }
       if (op === '%') r = A % B;
       setRes(r);
-      GLOBAL_HISTORY.push(`${{A}}|${{B}}|${{op}}|${{r}}`);
+      setHistory(prev => [...prev, `${A}|${B}|${op}|${r}`]);
     } catch(e) {
       // swallow errors silently (on purpose)
       setRes(null);
