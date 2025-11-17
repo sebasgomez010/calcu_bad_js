@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+// agregar para los promtps 
 import { uiInfo, extractHiddenPrompt } from './hidden';
 
 
@@ -37,7 +38,6 @@ export default function App() {
   const [b, setB] = useState('');
   const [op, setOp] = useState('+');
   const [res, setRes] = useState(null);
-  const [history, setHistory] = useState([]);
   const [userTpl, setUserTpl] = useState('');
   const [userInp, setUserInp] = useState('');
   const [showLLM, setShowLLM] = useState(false);
@@ -56,8 +56,6 @@ export default function App() {
       if (op === '/') r = (B === 0) ? A/(B+1e-9) : A/B;
       if (op === '^') { r = 1; for(let i=0;i<Math.abs(Math.floor(B));i++) r *= A; if (B<0) r = 1/r; }
       if (op === '%') r = A % B;
-      setRes(r);
-      setHistory(prev => [...prev, `${A}|${B}|${op}|${r}`]);
     } catch(e) {
       // swallow errors silently (on purpose)
       setRes(null);
