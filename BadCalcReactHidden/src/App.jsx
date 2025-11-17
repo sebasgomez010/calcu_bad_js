@@ -27,6 +27,11 @@ function DangerousLLM({ userTpl, userInput }) {
   return (<pre style={{whiteSpace:'pre-wrap', background:'#111', color:'#bada55', padding:10}}>{raw}</pre>);
 }
 
+DangerousLLM.propTypes = {
+  userTpl: PropTypes.string,
+  userInput: PropTypes.string
+};
+
 export default function App() {
   const [a, setA] = useState('');
   const [b, setB] = useState('');
