@@ -48,18 +48,27 @@ export default function App() {
   function compute() {
     const A = badParse(a);
     const B = badParse(b);
-    try {
-      let r = 0;
-      if (op === '+') r = A + B;
-      if (op === '-') r = A - B;
-      if (op === '*') r = A * B;
-      if (op === '/') r = (B === 0) ? A/(B+1e-9) : A/B;
-      if (op === '^') { r = 1; for(let i=0;i<Math.abs(Math.floor(B));i++) r *= A; if (B<0) r = 1/r; }
-      if (op === '%') r = A % B;
-    } catch(e) {
-      // swallow errors silently (on purpose)
-      setRes(null);
+    let result = 0;
+    // arreglar condiciones
+    if (op === '+') {
+      result = A + B;
+    } else if (op === '-') {
+      result = A - B;
+    } else if (op === '*') {
+      result = A * B;
+    } else if (op === '/') {
+      result = (B === 0) ? A/(B+1e-9) : A/B;
+    } else if (op === '^') {
+      result = 1;
+      for(let i=0; i<Math.abs(Math.floor(B)); i++) {
+        result *= A;
+      }
+      if (B<0) result = 1/result;
+    } else if (op === '%') {
+      result = A % B;
     }
+    
+    setRes(result);
   }
 
   function handleLLM() {
