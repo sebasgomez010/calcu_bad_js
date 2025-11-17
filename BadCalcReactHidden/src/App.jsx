@@ -7,7 +7,7 @@ import { uiInfo, extractHiddenPrompt } from './hidden';
 
 function badParse(s) {
   const num = Number(String(s).replace(',', '.'));
-  if (isNaN(num)) {
+  if (Number.isNaN(num)) {
     return 0;
   }
   return num;
