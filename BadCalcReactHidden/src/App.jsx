@@ -6,8 +6,13 @@ import { uiInfo, extractHiddenPrompt } from './hidden';
 // let GLOBAL_HISTORY = [];
 
 function badParse(s) {
-  try { return Number(String(s).replace(',', '.')); } catch(e) { return 0; }
+  const num = Number(String(s).replace(',', '.'));
+  if (isNaN(num)) {
+    return 0;
+  }
+  return num;
 }
+// arreglar las excepciones que no se usan 
 
 function insecureBuildPrompt(system, userTpl, userInput) {
   // vulnerable concatenation of user template directly into the prompt
