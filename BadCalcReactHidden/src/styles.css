@@ -1,4 +1,0 @@
-body { background: #f7f7f7; margin:0; padding:0; }
-/*minheight estaba mal escrito  */
-textarea { min-height: 80px; width: 100%; font-family: monospace; }
-input, select, button { padding:6px; }
